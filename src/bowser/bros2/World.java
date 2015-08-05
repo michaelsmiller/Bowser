@@ -201,13 +201,13 @@ public class World extends JComponent
     {
         assert entities.contains(e);
         return  e.bottomY()>=0 &&
-                e.topY()<=Global.BOARD_SIZE.getY();
+                e.topY()<=Global.BOARD_SIZE.y;
     }
     
     public boolean inRange(Entity e)
     {
         assert entities.contains(e);
-        return e.leftX()<lowerX+Global.BOARD_SIZE.getX()&&
+        return e.leftX()<lowerX+Global.BOARD_SIZE.x&&
                e.rightX()>lowerX&&
                inYRange(e);
     }
@@ -215,10 +215,10 @@ public class World extends JComponent
     public boolean inRange(Nonentity e)
     {
         assert nonentities.contains(e);
-        return e.leftX()<lowerX+Global.BOARD_SIZE.getX()&&
+        return e.leftX()<lowerX+Global.BOARD_SIZE.x&&
                e.rightX()>lowerX&&
                e.bottomY()>=0 &&
-               e.topY()<=Global.BOARD_SIZE.getY();
+               e.topY()<=Global.BOARD_SIZE.y;
     }
     
     public ArrayList<Collision> getCollisions()
@@ -280,11 +280,11 @@ public class World extends JComponent
     
     public void moveFrame()
     {
-        double X = Global.BOARD_SIZE.getX();
+        double X = Global.BOARD_SIZE.x;
         double center = (2*lowerX+X)/2;
         double dx = getBowser().midX()-center;
         double newX = lowerX+dx;
-        double maxLowerX = length*Global.BLOCK_LEN-Global.BOARD_SIZE.getX();
+        double maxLowerX = length*Global.BLOCK_LEN-Global.BOARD_SIZE.x;
         
         if (newX<0)//at the beginning of the stage
             lowerX=0;
@@ -346,8 +346,8 @@ public class World extends JComponent
     
     public void gameOver()
     {
-        double x = lowerX+Global.BOARD_SIZE.getX()/2-Global.BLOCK_R;
-        double y = Global.BOARD_SIZE.getY()/2-Global.BLOCK_R;
+        double x = lowerX+Global.BOARD_SIZE.x/2-Global.BLOCK_R;
+        double y = Global.BOARD_SIZE.y/2-Global.BLOCK_R;
         MarioHead m = new MarioHead(this,new DVector(x,y));
         entities.add(m);
         for (int i = 0; i < 200; i++)

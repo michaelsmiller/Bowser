@@ -20,7 +20,7 @@ public class Mushroom extends Movable
     {
         super(w,(new Vector(1,1)).convert(),loc);
         direction = RIGHT;
-        velocity.setX(Global.MUSHROOM_SPEED);
+        velocity.x = Global.MUSHROOM_SPEED;
         futureV = new DVector(velocity);
         type=t;
         if (type==LIFE)
@@ -54,14 +54,14 @@ public class Mushroom extends Movable
                 case RIGHT:direction = LEFT;break;
             }
         }
-        //System.out.println(velocity.getX());
+        //System.out.println(velocity.x);
     }
 
     @Override
     public void limitVelocity() 
     {
-        if (velocity.getY()>Global.MAX_FALLING_SPEED)
-            velocity.setY(Global.MAX_FALLING_SPEED);
+        if (velocity.y>Global.MAX_FALLING_SPEED)
+            velocity.y = Global.MAX_FALLING_SPEED;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class Mushroom extends Movable
     {
         switch(direction)
         {
-            case RIGHT:velocity.setX(Global.MUSHROOM_SPEED);
-            case LEFT:velocity.setX(-Global.MUSHROOM_SPEED);
+            case RIGHT:velocity.x = Global.MUSHROOM_SPEED;
+            case LEFT:velocity.x = -Global.MUSHROOM_SPEED;
         }
     }
 

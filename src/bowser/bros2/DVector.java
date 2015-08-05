@@ -11,8 +11,8 @@ package bowser.bros2;
  */
 public class DVector 
 {
-    private double x;
-    private double y;
+    public double x;
+    public double y;
     
     public DVector(double x1, double y1)
     {
@@ -32,29 +32,9 @@ public class DVector
         y = a.y;
     }
     
-    public double getX()
-    {
-        return x;
-    }
-    
-    public double getY()
-    {
-        return y;
-    }
-    
-    public void setX(double x1)
-    {
-        x = x1;
-    }
-    
-    public void setY(double y1)
-    {
-        y = y1;
-    }
-    
     public static DVector abs(DVector a)
     {
-        return new DVector(Math.abs(a.getX()),Math.abs(a.getY()));
+        return new DVector(Math.abs(a.x),Math.abs(a.y));
     }
     
     //I dunno, this could be really problematic in the future...Don't forget

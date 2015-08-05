@@ -80,22 +80,22 @@ public abstract class Entity
     
     public double topY()
     {
-        return location.getY();
+        return location.y;
     }
     
     public double bottomY()
     {
-        return location.getY()+size.getY();
+        return location.y+size.y;
     }
     
     public double leftX()
     {
-        return location.getX();
+        return location.x;
     }
     
     public double rightX()
     {
-        return location.getX()+size.getX();
+        return location.x+size.x;
     }
     
     public static double abs(double a){return Math.abs(a);}
@@ -119,10 +119,10 @@ public abstract class Entity
     
     protected boolean intersectsX(Entity a)
     {
-        double lx1 =location.getX();
-        double lx2 = a.location.getX();
-        double rx1 = lx1+size.getX();
-        double rx2 = lx2+a.size.getX();
+        double lx1 =location.x;
+        double lx2 = a.location.x;
+        double rx1 = lx1+size.x;
+        double rx2 = lx2+a.size.x;
         
         if (lx1==lx2&&rx1==rx2)//very special case
             return true;
@@ -133,10 +133,10 @@ public abstract class Entity
     
     protected boolean intersectsY(Entity a)
     {
-        double uy1 = location.getY();
-        double uy2 = a.location.getY();
-        double dy1 = uy1+size.getY();
-        double dy2 = uy2+a.size.getY();
+        double uy1 = location.y;
+        double uy2 = a.location.y;
+        double dy1 = uy1+size.y;
+        double dy2 = uy2+a.size.y;
         
         if (uy1==uy2&&dy1==dy2)//very special case
             return true;
@@ -152,7 +152,7 @@ public abstract class Entity
         double y1 = topY();
         double y2 = bottomY();
         
-        return between(point.getX(),x1,x2)&&between(point.getY(),y1,y2);
+        return between(point.x,x1,x2)&&between(point.y,y1,y2);
     }
     
     protected DVector topLeft()
@@ -182,12 +182,12 @@ public abstract class Entity
     
     protected double midX()
     {
-        return location.getX()+size.getX()/2;
+        return location.x+size.x/2;
     }
     
     protected double midY()
     {
-        return location.getY()+size.getY()/2;
+        return location.y+size.y/2;
     }
     
     protected DVector center()
@@ -251,11 +251,11 @@ public abstract class Entity
     {
         if (imageName!=null&&!imageName.equals(""))
         {
-            g2.drawImage(getImage(), (int) (location.getX()-world.getLowerX()), (int) location.getY(),
-                    (int) size.getX(),(int) size.getY(),world);
+            g2.drawImage(getImage(), (int) (location.x-world.getLowerX()), (int) location.y,
+                    (int) size.x,(int) size.y,world);
         
-            //g2.drawRect((int) location.getX(), (int) location.getY(),
-              //      (int) size.getX(), (int) size.getY());
+            //g2.drawRect((int) location.x, (int) location.y,
+              //      (int) size.x, (int) size.y);
         }
     }
     

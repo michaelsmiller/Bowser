@@ -18,13 +18,13 @@ public class Flagpole extends Entity
     public Flagpole(World w, Vector blockLoc) 
     {
         super(w, SIZE, blockLoc);
-        location.setX(leftX()+Global.BLOCK_R-size.getX()/2);
+        location.x = leftX()+Global.BLOCK_R-size.x/2;
         imageName = "Flagpole";
         interactable = true;
         staysAtTheEnd = true;
         flag = new Flag(world,this);
         world.add(flag);
-        world.add(new Block(world,new Vector(blockLoc.getX(),blockLoc.getY()+10),Block.INDESTRUCTIBLE,Block.UNBREAKABLE));
+        world.add(new Block(world,new Vector(blockLoc.x,blockLoc.y+10),Block.INDESTRUCTIBLE,Block.UNBREAKABLE));
     }
     
     public Flag getFlag()

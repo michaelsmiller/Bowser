@@ -51,8 +51,8 @@ public abstract class WalkingEnemy extends Movable implements Enemy
     @Override
     public void limitVelocity() 
     {
-        if (velocity.getY()>Global.MAX_FALLING_SPEED)
-            velocity.setY(Global.MAX_FALLING_SPEED);
+        if (velocity.y>Global.MAX_FALLING_SPEED)
+            velocity.y = Global.MAX_FALLING_SPEED;
     }
 
     @Override
@@ -60,11 +60,11 @@ public abstract class WalkingEnemy extends Movable implements Enemy
     {
         double vx = Global.GOOMBA_SPEED;
         if (direction==RIGHT)
-            velocity.setX(vx);
+            velocity.x = vx;
         else if (direction==LEFT)
-            velocity.setX(-vx);
+            velocity.x = -vx;
         else //direction==STILL
-            velocity.setX(0);
+            velocity.x = 0;
     }
 
     @Override

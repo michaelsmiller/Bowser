@@ -21,7 +21,7 @@ public class Koopa extends WalkingEnemy
     
     public boolean inShell()
     {
-        return size.getX()==size.getY();
+        return size.x==size.y;
     }
 
     /*@Override
@@ -58,13 +58,13 @@ public class Koopa extends WalkingEnemy
         if (!inShell())
             super.factorInControl();
         else
-            velocity.setX(Global.GOOMBA_SPEED*Global.SHELL_SPEED_MULTIPLIER);
+            velocity.x = Global.GOOMBA_SPEED*Global.SHELL_SPEED_MULTIPLIER;
     }
     
     private void turnIntoShell()
     {
         size = new Vector(1,1).convert();
-        location.setY(location.getY()+Global.BLOCK_LEN);
+        location.y = location.y+Global.BLOCK_LEN;
         direction = STILL;
     }
     

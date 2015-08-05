@@ -49,8 +49,8 @@ public class Castle extends Nonentity
     
     protected final ArrayList<DVector> fireLocations()
     {
-        double x = location.getX();
-        double y = location.getY();
+        double x = location.x;
+        double y = location.y;
         
         ArrayList<DVector> locs = new ArrayList<>();
         
@@ -81,7 +81,7 @@ public class Castle extends Nonentity
         {
             DVector loc = fireLocations.remove(0);
             world.nonentitiesToAddThisStep().add(new Fire(world,
-                                                new DVector(size.getX()+2*d,size.getY()+2*d),loc));
+                                                new DVector(size.x = +2*d,size.y = +2*d),loc));
             return;
         }
         

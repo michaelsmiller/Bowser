@@ -28,7 +28,7 @@ public class Flag extends Movable
         {
             collideWithBlock(a,colType);
             interactable = false;
-            futureV.setY(0);
+            futureV.y = 0;
             
             world.getBowser().goThroughFlagpole();
         }
@@ -36,8 +36,8 @@ public class Flag extends Movable
     
     public void lower()
     {
-        velocity.setY(Global.FLAGPOLE_SPEED);
-        futureV.setY(Global.FLAGPOLE_SPEED);
+        velocity.y = Global.FLAGPOLE_SPEED;
+        futureV.y = Global.FLAGPOLE_SPEED;
     }
 
     @Override

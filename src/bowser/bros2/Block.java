@@ -95,14 +95,14 @@ public class Block extends Entity
     private void dropMushroom(int mushType)
     {
         double l = Global.BLOCK_LEN;
-        DVector loc = new DVector(location.getX(),location.getY()-l);
+        DVector loc = new DVector(location.x,location.y-l);
         world.entitiesToAddThisStep().add(new Mushroom(world,loc,mushType));
     }
     
     private void dropCoin()
     {
         double l = Global.BLOCK_LEN;
-        DVector loc = new DVector(location.getX(),location.getY()-l);
+        DVector loc = new DVector(location.x,location.y-l);
         world.entitiesToAddThisStep().add(new Coin(world,loc,this));
     }
     
@@ -153,8 +153,8 @@ public class Block extends Entity
     {
         assert breakable();
         
-        double x = location.getX();
-        double y = location.getY();
+        double x = location.x;
+        double y = location.y;
         double r = Global.BLOCK_R;
         
         world.add(new BrickFragment(world,new DVector(x,y),LEFT,true));//topLeft

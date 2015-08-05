@@ -13,8 +13,8 @@ public final class Structure
 {
     public static void addSteps(World w,Vector firstLoc,int length)
     {
-        int x1 = firstLoc.getX();
-        int y1 = firstLoc.getY();
+        int x1 = firstLoc.x;
+        int y1 = firstLoc.y;
         
         for (int i = 1; i <=length;i++)
             for (int j = y1; j>y1-i; j--)

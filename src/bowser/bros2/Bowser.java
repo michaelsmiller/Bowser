@@ -59,7 +59,7 @@ public class Bowser extends Movable
         if (imageName.substring(0,1).equals("L"))//facing left
         {
             d = LEFT;
-            loc = new DVector(leftX()-Fireball.STANDARD_SIZE.getX(),location.getY());
+            loc = new DVector(leftX()-Fireball.STANDARD_SIZE.x,location.y);
         }
         else //facing right
         {
@@ -92,8 +92,8 @@ public class Bowser extends Movable
     
     public void goThroughFlagpole()
     {
-        double dx = size.getX()+Flagpole.SIZE.getX();
-        location.setX(location.getX()+dx);
+        double dx = size.x+Flagpole.SIZE.x;
+        location.x = location.x+dx;
         
         String dir = imageName.substring(0,1);
         if (dir.equals("L"))
@@ -131,7 +131,7 @@ public class Bowser extends Movable
             world.getAdapter().setUserControl(false);
             collideWithBlock(a,colType);
             gravity = false;
-            futureV.setY(Global.FLAGPOLE_SPEED);
+            futureV.y = Global.FLAGPOLE_SPEED;
             direction = STILL;
             jump = false;
             f.getFlag().lower();
@@ -141,7 +141,7 @@ public class Bowser extends Movable
             Block b = (Block)a;
             realCollision = true;
             if (b.invisible()&&
-                    (colType!=UP||velocity.getY()>0))//it reads some collisions as up when they should be down
+                    (colType!=UP||velocity.y>0))//it reads some collisions as up when they should be down
                 return;
             if (colType==UP)
                 b.hit();
@@ -152,7 +152,7 @@ public class Bowser extends Movable
             Movable enemy = (Movable)a;
             
             //if you're hitting a stationary shell
-            if (enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.getX()==0)
+            if (enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.x==0)
             {
                 DVector temp = new DVector(futureV);
                 collideWithBlock(a,colType);
@@ -163,7 +163,7 @@ public class Bowser extends Movable
                 
             if (colType==DOWN)//kill the enemy!
             {
-                futureV.setY(-Global.JUMPING_SPEED*.5);
+                futureV.y = -Global.JUMPING_SPEED*.5;
                 ((Enemy)a).getStomped();
             }
             else //bowser takes damage
@@ -192,8 +192,8 @@ public class Bowser extends Movable
     @Override
     public void limitVelocity()
     {
-        double vx1 = velocity.getX();
-        double vy1 = velocity.getY();
+        double vx1 = velocity.x;
+        double vy1 = velocity.y;
         
         //if (onGround)
         //{
@@ -203,11 +203,11 @@ public class Bowser extends Movable
             if (abs(vx1)>fric)
                 vx2 = neg*(abs(vx1)-fric);
             else vx2 = 0;
-            velocity.setX(vx2);
+            velocity.x = vx2;
         //}
         
         if (vy1>Global.MAX_FALLING_SPEED)
-            velocity.setY(Global.MAX_FALLING_SPEED);
+            velocity.y = Global.MAX_FALLING_SPEED;
     }
     
     private double moveToward(double a, double goal)
@@ -240,15 +240,15 @@ public class Bowser extends Movable
         {
             case RIGHT:
                 if (!hitRightBlockThisStep())
-                    velocity.setX(Global.WALKING_SPEED);
+                    velocity.x = Global.WALKING_SPEED;
                 break;
             case LEFT:
                 if (!hitLeftBlockThisStep())
-                    velocity.setX(-Global.WALKING_SPEED);
+                    velocity.x = -Global.WALKING_SPEED;
                 break;
         }
         if (onGround&&jump)
-            velocity.setY(-Global.JUMPING_SPEED);
+            velocity.y = -Global.JUMPING_SPEED;
     }
     
     public boolean hurt()
@@ -281,23 +281,23 @@ public class Bowser extends Movable
     {
         String num;
         int t = Global.TIME_PER_BOWSER_STEP;
-        if (!(onGround&&velocity.getX()!=0))
+        if (!(onGround&&velocity.x!=0))
             num = "";
         else if (counter%t<t/2)
             num="1";
         else num="2";
         
         String dir;
-        if (velocity.getX()>0)
+        if (velocity.x>0)
             dir="R";
-        else if (velocity.getX()<0)
+        else if (velocity.x<0)
             dir="L";
         else dir = imageName.substring(0,1);
         
         String movement = "Still";
-        if (onGround&&velocity.getX()!=0)
+        if (onGround&&velocity.x!=0)
             movement = "Walking";
-        else if (velocity.getY()<0)
+        else if (velocity.y<0)
             movement = "Jumping";
         
         imageName = dir+"Bowser"+movement+num;

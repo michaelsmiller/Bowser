@@ -49,16 +49,16 @@ public abstract class Movable extends Entity
     public void stepLocation()
     {
         location = DVector.addVector(location,velocity);
-        //System.out.println(location.getX()+" "+location.getY());
+        //System.out.println(location.x+" "+location.y);
     }
     
     private boolean intersectedX(Entity a)
     {
         DVector pLoc = DVector.subtractVector(location, velocity);
-        double left1 = pLoc.getX();
-        double right1 = left1+size.getX();
-        double left2 = a.location.getX();
-        double right2 = left2+a.size.getX();
+        double left1 = pLoc.x;
+        double right1 = left1+size.x;
+        double left2 = a.location.x;
+        double right2 = left2+a.size.x;
         
         return between(left1,left2,right2)||between(right1,left2,right2);
     }
@@ -66,10 +66,10 @@ public abstract class Movable extends Entity
     private boolean intersectedY(Entity a)
     {
         DVector pLoc = DVector.subtractVector(location, velocity);
-        double up1 = pLoc.getY();
-        double down1 = up1+size.getY();
-        double up2 = a.location.getY();
-        double down2 = up2+a.size.getY();
+        double up1 = pLoc.y;
+        double down1 = up1+size.y;
+        double up2 = a.location.y;
+        double down2 = up2+a.size.y;
         
         return between(up1,up2,down2)||between(down1,up2,down2);
     }
@@ -94,13 +94,13 @@ public abstract class Movable extends Entity
         }
         
         //deals with the easy case of only moving in one axis.
-        if (velocity.getX()==0)//moving up or down
+        if (velocity.x==0)//moving up or down
         {
             if (topY()<a.topY())
                 return DOWN;
             else return UP;
         }
-        else if (velocity.getY()==0)//moving right or left
+        else if (velocity.y==0)//moving right or left
         {
             if (rightX()>a.rightX())
                 return LEFT;
@@ -129,40 +129,40 @@ public abstract class Movable extends Entity
             DVector thisCorner = cornersAContains.get(0);
             
             double dx;
-            if (velocity.getX()>0)
-                dx=abs(thisCorner.getX()-a.leftX());
-            else dx=abs(thisCorner.getX()-a.rightX());
-            double dt = dx/abs(velocity.getX());
+            if (velocity.x>0)
+                dx=abs(thisCorner.x-a.leftX());
+            else dx=abs(thisCorner.x-a.rightX());
+            double dt = dx/abs(velocity.x);
             double dy;
-            if (velocity.getY()>0)
-                dy = abs(thisCorner.getY()-a.topY());
-            else dy = abs(thisCorner.getY()-a.bottomY());
+            if (velocity.y>0)
+                dy = abs(thisCorner.y-a.topY());
+            else dy = abs(thisCorner.y-a.bottomY());
             
-            if (dt*abs(velocity.getY())<dy)//x collision happened first
+            if (dt*abs(velocity.y)<dy)//x collision happened first
             {
-                /*if (thisCorner.getX()>otherCorner.getX())
+                /*if (thisCorner.x>otherCorner.x)
                     return RIGHT;
                 else return LEFT;*/
-                if ((velocity.getX()<0 && thisCorner.getX()!=leftX())//seems like up when down
-                  ||(velocity.getX()>0 && thisCorner.getX()!=rightX()))//seems like down when its up
+                if ((velocity.x<0 && thisCorner.x!=leftX())//seems like up when down
+                  ||(velocity.x>0 && thisCorner.x!=rightX()))//seems like down when its up
                 {
-                    if (velocity.getY()<0)
+                    if (velocity.y<0)
                         return UP;
                     else return LEFT;
                 }
                 /*if (rightX()>a.rightX())
                     return LEFT;
                 else return RIGHT;*/
-                if (velocity.getX()>0)
+                if (velocity.x>0)
                     return RIGHT;
                 else return LEFT;
             }
             else //y collision happened first
             {
-                if ((velocity.getY()<0 && thisCorner.getY()!=topY())//seems like up when its not
-                  ||(velocity.getY()>0 && thisCorner.getY()!=bottomY()))//seems like down when its not
+                if ((velocity.y<0 && thisCorner.y!=topY())//seems like up when its not
+                  ||(velocity.y>0 && thisCorner.y!=bottomY()))//seems like down when its not
                 {
-                    if (velocity.getX()>0)
+                    if (velocity.x>0)
                         return RIGHT;
                     else return LEFT;
                 }
@@ -170,7 +170,7 @@ public abstract class Movable extends Entity
                     return DOWN;
                 else return UP;*/
                 
-                if (velocity.getY()>0)
+                if (velocity.y>0)
                     return DOWN;
                 else return UP;
             }
@@ -196,7 +196,7 @@ public abstract class Movable extends Entity
         ArrayList<DVector> bCornersAContains = b.cornersIn(a);
         DVector c1 = bCornersAContains.get(0);
         DVector c2 = bCornersAContains.get(1);
-        if (c1.getX()==c2.getX())//its a side collision
+        if (c1.x==c2.x)//its a side collision
         {
             if (a.leftX()<b.leftX())
                 return RIGHT;
@@ -204,7 +204,7 @@ public abstract class Movable extends Entity
         }
         else //vertical collision
         {
-            assert c1.getY()==c2.getY();
+            assert c1.y==c2.y;
 
             if (a.topY()<b.topY())
                 return DOWN;
@@ -297,25 +297,25 @@ public abstract class Movable extends Entity
         switch (colType)
         {
             case UP:
-                futureV.setY(-futureV.getY()*.4);
+                futureV.y = -futureV.y*.4;
                 double dy = block.bottomY()-topY();
                 assert dy>0;
-                location.setY(location.getY()+dy);
+                location.y = location.y+dy;
                 break;
             case DOWN:
-                futureV.setY(0);
+                futureV.y = 0;
                 double y = bottomY()-block.topY();
-                location.setY(location.getY()-y);
+                location.y = location.y-y;
                 break;
             case RIGHT:
-                futureV.setX(0);
+                futureV.x = 0;
                 double dx = rightX()-block.leftX();
-                location.setX(location.getX()-dx);
+                location.x = location.x-dx;
                 break;
             case LEFT:
-                futureV.setX(0);
+                futureV.x = 0;
                 double x = block.rightX()-leftX();
-                location.setX(location.getX()+x);
+                location.x = location.x+x;
                 break;
         }
     }
@@ -383,7 +383,7 @@ public abstract class Movable extends Entity
     protected void factorInGravity()
     {
         if (gravity && !onGround && !hitGroundThisStep())
-            velocity.setY(velocity.getY()+Global.GRAVITY);
+            velocity.y = velocity.y+Global.GRAVITY;
     }
     
     protected void updateOnGround()

@@ -37,11 +37,11 @@ public abstract class Nonentity
     {
         if (imageName!=null&&!imageName.equals(""))
         {
-            g2.drawImage(getImage(), (int) (location.getX()-world.getLowerX()), (int) location.getY(),
-                    (int) size.getX(),(int) size.getY(),world);
+            g2.drawImage(getImage(), (int) (location.x-world.getLowerX()), (int) location.y,
+                    (int) size.x,(int) size.y,world);
         
-            //g2.drawRect((int) location.getX(), (int) location.getY(),
-              //      (int) size.getX(), (int) size.getY());
+            //g2.drawRect((int) location.x, (int) location.y,
+              //      (int) size.x, (int) size.y);
         }
     }
     
@@ -59,22 +59,22 @@ public abstract class Nonentity
     
     public double topY()
     {
-        return location.getY();
+        return location.y;
     }
     
     public double bottomY()
     {
-        return location.getY()+size.getY();
+        return location.y+size.y;
     }
     
     public double leftX()
     {
-        return location.getX();
+        return location.x;
     }
     
     public double rightX()
     {
-        return location.getX()+size.getX();
+        return location.x+size.x;
     }
     
     protected abstract void updateImageName();

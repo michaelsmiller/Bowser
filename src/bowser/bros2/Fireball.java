@@ -21,9 +21,9 @@ public class Fireball extends Movable
         origin = o;
         direction = dir;
         if (direction==RIGHT)
-            velocity.setX(Global.FIREBALL_SPEED);
+            velocity.x = Global.FIREBALL_SPEED;
         else if (direction==LEFT)
-            velocity.setX(-Global.FIREBALL_SPEED);
+            velocity.x = -Global.FIREBALL_SPEED;
         updateImageName();
         futureV = new DVector(velocity);
         interactable = true;
@@ -35,7 +35,7 @@ public class Fireball extends Movable
     {
         DVector loc = new DVector();
         double b = Global.BLOCK_LEN;
-        double dx = size.getX()/4;
+        double dx = size.x/4;
         switch (colType)
         {
             case RIGHT:loc = new DVector(rightX()-dx,topY());break;
