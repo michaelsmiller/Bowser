@@ -21,7 +21,7 @@ public class Castle extends Nonentity
     public static final int SMALL = 1;
     
     protected static final DVector SMALL_SIZE = new Vector(5,5).convert();
-    protected static final DVector LARGE_SIZE = new DVector();
+    protected static final DVector LARGE_SIZE = new DVector();//haven't done that yet
     
     public Castle(World w, Vector loc, int t) 
     {
@@ -81,7 +81,7 @@ public class Castle extends Nonentity
         {
             DVector loc = fireLocations.remove(0);
             world.nonentitiesToAddThisStep().add(new Fire(world,
-                                                new DVector(size.x = +2*d,size.y = +2*d),loc));
+                                                new DVector(size.x+2*d,size.y+2*d),loc));
             return;
         }
         
