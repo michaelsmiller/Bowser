@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/WalkingEnemy.java</file>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/Entity.java</file>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/Koopa.java</file>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/Bowser.java</file>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/Mushroom.java</file>
+            <file>file:/Users/MichaelMiller/Desktop/Bowser/src/bowser/bros2/Movable.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -113,7 +113,7 @@ public class Bowser extends Movable
     @Override
     protected void collideWithBlock(Entity block,int colType)
     {
-        if (block instanceof Block&&((Block)block).getType()==Block.INVISIBLE&&colType!=UP)
+        if (block instanceof Block&&((Block)block).getType()==Block.INVISIBLE&&colType!=UP)//makes sure no collisions with invisible
             return;
         super.collideWithBlock(block,colType);
     }
@@ -157,7 +157,7 @@ public class Bowser extends Movable
                 DVector temp = new DVector(futureV);
                 collideWithBlock(a,colType);
                 futureV = temp;
-                enemy.setDirection(midX()>enemy.midX() ? LEFT : RIGHT);
+                //enemy.setDirection(midX()>enemy.midX() ? LEFT : RIGHT);
             }
                 
                 

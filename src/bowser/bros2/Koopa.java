@@ -33,6 +33,8 @@ public class Koopa extends WalkingEnemy
     @Override
     public void finalUpdates()
     {
+        if (direction==LEFT)
+            printDirection(direction);
         super.finalUpdates();
     }
 
@@ -58,7 +60,7 @@ public class Koopa extends WalkingEnemy
         if (!inShell())
             super.factorInControl();
         else
-            velocity.x = Global.GOOMBA_SPEED*Global.SHELL_SPEED_MULTIPLIER;
+            velocity.x = Global.GOOMBA_SPEED*Global.SHELL_SPEED_MULTIPLIER*direction;
     }
     
     private void turnIntoShell()

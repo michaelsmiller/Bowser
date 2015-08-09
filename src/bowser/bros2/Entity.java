@@ -25,10 +25,10 @@ public abstract class Entity
     protected boolean staysAtTheEnd;
     
     //everything is from the reference point of the entity
-    public static final int RIGHT = 4;
-    public static final int LEFT = 1;
+    public static final int RIGHT = 1;
+    public static final int LEFT = -1;
     public static final int UP = 2;
-    public static final int DOWN = 3;
+    public static final int DOWN = -2;
     public static final int STILL = 0;
     
     //any constructor extending Entity should instantiate imageName and interactable
