@@ -49,7 +49,6 @@ public abstract class Movable extends Entity
     public void stepLocation()
     {
         location = DVector.addVector(location,velocity);
-        //System.out.println(location.x+" "+location.y);
     }
     
     private boolean intersectedX(Entity a)

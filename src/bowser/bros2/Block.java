@@ -121,8 +121,8 @@ public class Block extends Entity
         //kills enemy standing on a hittable block
         if (hittable())
             for (Entity e: getAboveEntities())
-                if (e instanceof Goomba)
-                    ((Goomba)e).dieFromBlockHit();
+                if (e instanceof WalkingEnemy)
+                    ((WalkingEnemy)e).dieFromBlockHit();
         
         switch (breakType)
         {

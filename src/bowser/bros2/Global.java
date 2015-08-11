@@ -17,7 +17,7 @@ public final class Global
     public static final double WALKING_SPEED = 2;
     public static final double GOOMBA_SPEED = .5;
     public static final int GOOMBA_DEATH_DELAY = 40;
-    public static final double SHELL_SPEED_MULTIPLIER = 2;
+    public static final double SHELL_SPEED_MULTIPLIER = 6;
     public static final int COIN_SPIN_DELAY = 10;
     public static final double MUSHROOM_SPEED = 1;
     public static final double FIREBALL_SPEED = 5;

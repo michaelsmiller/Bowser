@@ -27,14 +27,14 @@ public class Game
         
         //Structure.addSteps(w,new Vector(32,Global.HEIGHT-3),10);
         
-        w.add(new Block(w,new Vector(10,6),Block.INVISIBLE,Block.COIN));
-        w.add(new Block(w,new Vector(11,6),Block.BRICK,Block.BREAKABLE));
-        w.add(new Block(w,new Vector(12,6),Block.BRICK,Block.BREAKABLE));
-        w.add(new Block(w,new Vector(13,6),Block.BRICK,Block.BREAKABLE));
-        w.add(new Block(w,new Vector(15,9),Block.BRICK,Block.COIN));
-        w.add(new Block(w,new Vector(20,9),Block.INVISIBLE,Block.COIN));
+        //w.add(new Block(w,new Vector(10,6),Block.INVISIBLE,Block.COIN));
+        //w.add(new Block(w,new Vector(11,6),Block.BRICK,Block.BREAKABLE));
+        //w.add(new Block(w,new Vector(12,6),Block.BRICK,Block.BREAKABLE));
+        //w.add(new Block(w,new Vector(13,6),Block.BRICK,Block.BREAKABLE));
+        //w.add(new Block(w,new Vector(15,9),Block.BRICK,Block.COIN));
+        //w.add(new Block(w,new Vector(20,9),Block.INVISIBLE,Block.COIN));
         
-        w.add(new Goomba(w,new Vector(11,4)));
+        //w.add(new Goomba(w,new Vector(11,4)));
         //w.add(new Goomba(w,new Vector(13,4)));
         w.add(new Koopa(w,new Vector(13,5)));
         

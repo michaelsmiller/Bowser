@@ -33,8 +33,8 @@ public class Koopa extends WalkingEnemy
     @Override
     public void finalUpdates()
     {
-        if (direction==LEFT)
-            printDirection(direction);
+        //if (direction==STILL||direction==LEFT)
+            //printDirection(direction);
         super.finalUpdates();
     }
 
@@ -59,8 +59,12 @@ public class Koopa extends WalkingEnemy
     {
         if (!inShell())
             super.factorInControl();
-        else
+        else //inShell()
+        {
             velocity.x = Global.GOOMBA_SPEED*Global.SHELL_SPEED_MULTIPLIER*direction;
+            futureV = new DVector(velocity);
+            //System.out.println(velocity.x+"");
+        }
     }
     
     private void turnIntoShell()
@@ -85,6 +89,10 @@ public class Koopa extends WalkingEnemy
         else if (direction==STILL)
             direction = (world.getBowser().midX()<midX()) ? RIGHT : LEFT;
         else //moving shell
+        {
             direction = STILL;
+            //futureV.x = 0;
+            //velocity.x = 0;
+        }
     }
 }

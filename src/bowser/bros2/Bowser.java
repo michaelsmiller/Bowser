@@ -151,20 +151,20 @@ public class Bowser extends Movable
         {
             Movable enemy = (Movable)a;
             
-            //if you're hitting a stationary shell
-            if (enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.x==0)
-            {
-                DVector temp = new DVector(futureV);
-                collideWithBlock(a,colType);
-                futureV = temp;
-                //enemy.setDirection(midX()>enemy.midX() ? LEFT : RIGHT);
-            }
-                
-                
             if (colType==DOWN)//kill the enemy!
-            {
+            {                
+                collideWithBlock(a,colType);
                 futureV.y = -Global.JUMPING_SPEED*.5;
                 ((Enemy)a).getStomped();
+            }
+            else if(enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.x == 0){
+                DVector temp = new DVector(futureV);
+                collideWithBlock(a,colType);
+                futureV = temp;    
+                if(colType==LEFT)
+                    ((Koopa)a).direction = LEFT;    
+                if(colType==RIGHT)
+                    ((Koopa)a).direction = RIGHT;
             }
             else //bowser takes damage
             {
