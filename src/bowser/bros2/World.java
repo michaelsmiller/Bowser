@@ -16,7 +16,6 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,6 +86,20 @@ public class World extends JComponent
         score = 0;
         
         gameplay = NORMAL;
+    }
+    
+    //this makes sure the list of entities is sorted so that it goes bowser, koopas, goombas, others.
+    public void sortEntities()
+    {
+        for (int i = 0; i < entities.size(); i++)
+        {
+            Entity e = entities.get(i);
+            if (e instanceof Koopa)
+            {
+                entities.add(1,entities.remove(i));
+                i++;
+            }
+        }
     }
     
     /**

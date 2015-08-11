@@ -33,7 +33,7 @@ public abstract class WalkingEnemy extends Movable implements Enemy
         if (a instanceof Block||a instanceof WalkingEnemy||a instanceof Bowser)
             collideWithBlock(a,colType);
         
-        if (a instanceof WalkingEnemy)
+        if (a instanceof WalkingEnemy && !(a instanceof Koopa))
             ((Movable)a).collideWithBlock(this,reverseCollision(colType));
     }
     
@@ -45,6 +45,7 @@ public abstract class WalkingEnemy extends Movable implements Enemy
         {
             case LEFT:direction = RIGHT;break;
             case RIGHT:direction = LEFT;break;
+            
         }
     }
 

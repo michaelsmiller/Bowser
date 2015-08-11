@@ -34,8 +34,8 @@ public class Game
         //w.add(new Block(w,new Vector(15,9),Block.BRICK,Block.COIN));
         //w.add(new Block(w,new Vector(20,9),Block.INVISIBLE,Block.COIN));
         
-        //w.add(new Goomba(w,new Vector(11,4)));
-        //w.add(new Goomba(w,new Vector(13,4)));
+        w.add(new Goomba(w,new Vector(11,4)));
+        w.add(new Goomba(w,new Vector(15,4)));
         w.add(new Koopa(w,new Vector(13,5)));
         
         w.add(new Coin(w,new Vector(9,8),null));
@@ -45,6 +45,8 @@ public class Game
         w.add(new Flagpole(w,new Vector(30,Global.HEIGHT-13)));
         
         w.add(new Castle(w,new Vector(37,lowest-6),Castle.SMALL));
+        
+        w.sortEntities();
         
         f.setLocationRelativeTo(null);
         f.setVisible(true);

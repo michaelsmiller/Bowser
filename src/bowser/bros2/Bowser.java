@@ -157,14 +157,16 @@ public class Bowser extends Movable
                 futureV.y = -Global.JUMPING_SPEED*.5;
                 ((Enemy)a).getStomped();
             }
-            else if(enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.x == 0){
+            else if(enemy instanceof Koopa && ((Koopa)a).inShell() && enemy.velocity.x == 0)
+            {
                 DVector temp = new DVector(futureV);
                 collideWithBlock(a,colType);
                 futureV = temp;    
-                if(colType==LEFT)
+                /*if(colType==LEFT)
                     ((Koopa)a).direction = LEFT;    
                 if(colType==RIGHT)
-                    ((Koopa)a).direction = RIGHT;
+                    ((Koopa)a).direction = RIGHT;*/
+                ((Koopa)enemy).getStomped();
             }
             else //bowser takes damage
             {

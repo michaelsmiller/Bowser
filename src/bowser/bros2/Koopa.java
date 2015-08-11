@@ -67,6 +67,14 @@ public class Koopa extends WalkingEnemy
         }
     }
     
+    @Override
+    public void collideWith(Entity a, int colType)
+    {
+        if (a instanceof WalkingEnemy && inShell() && abs(velocity.x) > 0)
+            ((WalkingEnemy)a).dieFromBlockHit();
+        else super.collideWith(a,colType);
+    }
+    
     private void turnIntoShell()
     {
         size = new Vector(1,1).convert();

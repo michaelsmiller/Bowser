@@ -298,7 +298,7 @@ public abstract class Movable extends Entity
             case UP:
                 futureV.y = -futureV.y*.4;
                 double dy = block.bottomY()-topY();
-                assert dy>0;
+                //assert dy>0;
                 location.y = location.y+dy;
                 break;
             case DOWN:
@@ -321,7 +321,7 @@ public abstract class Movable extends Entity
     
     protected void dealWithCollisions()
     {
-        if (!collidable())
+        if (!collidable() || (futureV.equals(new DVector()) && !(this instanceof Bowser)))
             return;
         ArrayList<Entity> collisions = getIntersectingEntities();
         sortByPriorityCollision(collisions);
