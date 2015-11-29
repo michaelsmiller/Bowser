@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class World extends JComponent
 {
-    private final JFrame frame;
+    private JFrame frame;
     private double lowerX;
     private final int length;
     private final long startTime,endTime;
@@ -34,7 +35,8 @@ public class World extends JComponent
     private final ArrayList<Nonentity> nonentities;
     private ArrayList<Nonentity> nonentitiesToAddThisStep;
     private ArrayList<Entity> entitiesToAddThisStep;
-    public final HashMap<String, BufferedImage> images;
+
+    public static final HashMap<String, BufferedImage> images = new HashMap<>();
     private String background;
     private ArrayList<Collision> collisions;
     
@@ -50,13 +52,12 @@ public class World extends JComponent
      * @param X
      * @param stageLen
      */
-    public World(JFrame f, double X, int stageLen)
+    public World(JFrame f, Dimension size, double X, int stageLen)
     {
         super();
+        //f.setSize((int)(Global.LENGTH*Global.BLOCK_LEN),(int)(Global.HEIGHT*Global.BLOCK_LEN)+20);
         frame = f;
-        f.add(this);
-        f.setSize((int)(Global.LENGTH*Global.BLOCK_LEN),(int)(Global.HEIGHT*Global.BLOCK_LEN)+20);
-        setSize(new Dimension(f.getWidth(),f.getHeight()));
+        setSize(size);
         
         lowerX = X;
         length = stageLen;
@@ -80,12 +81,16 @@ public class World extends JComponent
         
         frame.addKeyListener(new Adapter(this));
         
-        images = new HashMap<>();
         readImages();
         background = "DefaultBackground";
         score = 0;
         
         gameplay = NORMAL;
+    }
+    
+    public World(JFrame f, double X, int stageLen)
+    {
+        this(f,new Dimension(f.getWidth(),f.getHeight()),X,stageLen);
     }
     
     //this makes sure the list of entities is sorted so that it goes bowser, koopas, goombas, others.
@@ -105,21 +110,36 @@ public class World extends JComponent
     /**
      * This awesome method reads all the images into a hashmap for quick use
      */
-    private void readImages()
+    public static void readImages()
     {
         String name="";
         try 
         {
-            Scanner reader = new Scanner(getClass().getResourceAsStream("/Files/imageNames.txt"));
+            Scanner reader = new Scanner(World.class.getResourceAsStream("/Files/imageNames.txt"));
             while (reader.hasNext())
             {
                 name = reader.nextLine();
                 if (name.length()>0)
-                    images.put(name,ImageIO.read(getClass().getResourceAsStream("/Pictures/"+name+".png")));
+                    images.put(name,ImageIO.read(World.class.getResourceAsStream("/Pictures/"+name+".png")));
             }
         }
         catch (Exception e)
         {System.out.println("Making images didn't work\n"+name);}
+    }
+    
+    public Block getBlockAt(DVector loc)
+    {
+        if (loc==null)
+            return null;
+        
+        double r = Global.BLOCK_R;
+        
+        for (Entity e : entities)
+            if (e instanceof Block && e.getLocation().equals(loc))
+                return (Block)e;
+        
+        //System.err.println("Shit shit shit shit shit check getBlockAt in World");
+        return null;
     }
     
     public void add(Entity e)
@@ -134,12 +154,12 @@ public class World extends JComponent
     
     public JFrame getFrame()
     {
-        return frame;
+        return (JFrame)SwingUtilities.getWindowAncestor(this);
     }
     
     public Adapter getAdapter()
     {
-        return (Adapter)frame.getKeyListeners()[0];
+        return (Adapter)getFrame().getKeyListeners()[0];
     }
     
     public void setControl(boolean b)
@@ -297,7 +317,7 @@ public class World extends JComponent
         double center = (2*lowerX+X)/2;
         double dx = getBowser().midX()-center;
         double newX = lowerX+dx;
-        double maxLowerX = length*Global.BLOCK_LEN-Global.BOARD_SIZE.x;
+        double maxLowerX = length*Global.BLOCK_LEN-X;
         
         if (newX<0)//at the beginning of the stage
             lowerX=0;

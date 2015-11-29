@@ -13,6 +13,11 @@ public final class Coin extends Movable
 {
     private final Block origin;
     
+    public Coin(World w, Vector loc, Vector originLoc)
+    {
+        this(w,loc,w.getBlockAt(originLoc.convert()));
+    }
+    
     public Coin(World w,DVector loc,Block or)
     {
         super(w,new DVector(),new Vector());

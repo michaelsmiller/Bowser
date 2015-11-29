@@ -11,6 +11,8 @@ package bowser.bros2;
  */
 public class Vector 
 {
+    public static final Vector NONEXISTENT = new Vector(-10,-10);
+    
     public int x;
     public int y;
     

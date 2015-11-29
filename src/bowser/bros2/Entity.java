@@ -23,6 +23,10 @@ public abstract class Entity
     protected String imageName;
     protected int counter;
     protected boolean staysAtTheEnd;
+    protected int drawPriority;//determines whether to draw last
+    
+    public static final int LAST = 0;
+    public static final int NOT_LAST = 1;
     
     //everything is from the reference point of the entity
     public static final int RIGHT = 1;

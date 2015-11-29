@@ -1,0 +1,14 @@
+Block
+1 2 0 0
+
+Bowser 
+1 2
+
+Coin
+1.1 1.1 2.2 2.2
+
+Goomba
+1 2
+
+Koopa
+1 2
