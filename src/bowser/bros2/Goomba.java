@@ -11,6 +11,7 @@ package bowser.bros2;
  */
 public class Goomba extends WalkingEnemy
 {
+    private static final String id = "Goomba";
     
     public Goomba(World w, Vector loc)
     {
@@ -45,5 +46,11 @@ public class Goomba extends WalkingEnemy
     public void getStomped()
     {
         die();
+    }
+    
+    @Override
+    public String id()
+    {
+        return id;
     }
 }

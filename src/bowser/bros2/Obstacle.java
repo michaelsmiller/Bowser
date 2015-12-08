@@ -12,6 +12,8 @@ package bowser.bros2;
 public class Obstacle extends Block
 {
     public static final int INVISIBLE_WALL = 1;
+    
+    private static final String id = "Obstacle";
 
     public Obstacle(World w, Vector loc,DVector s,int whatItIs) 
     {

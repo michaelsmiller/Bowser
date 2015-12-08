@@ -11,6 +11,8 @@ package bowser.bros2;
  */
 public class BrickFragment extends Movable
 {
+    private static final String id = "BrickFragment";
+    
     public BrickFragment(World w, DVector loc, int dir,boolean top)
     {
         super(w,new DVector(Global.BLOCK_R,Global.BLOCK_R),new Vector());
@@ -36,6 +38,7 @@ public class BrickFragment extends Movable
             vx*=-1;
         velocity = new DVector(vx,vy);
         futureV = new DVector(velocity);
+        depth = FRONT;
     }
     
     @Override
@@ -82,4 +85,8 @@ public class BrickFragment extends Movable
         return !inRange();
     }
     
+    public String id()
+    {
+        return id;
+    }
 }

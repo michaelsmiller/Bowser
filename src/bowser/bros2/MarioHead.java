@@ -12,6 +12,7 @@ package bowser.bros2;
 public class MarioHead extends Entity
 {
     private static final double INCREASE_PER_STEP = 2;
+    private static final String id = "MarioHead";
     
     public MarioHead(World w, DVector loc) 
     {
@@ -19,6 +20,7 @@ public class MarioHead extends Entity
         location = loc;
         interactable = false;
         imageName = "MarioHead";
+        depth = FRONT;
     }
 
     @Override
@@ -40,5 +42,11 @@ public class MarioHead extends Entity
     public boolean readyToBeRemoved() 
     {
         return false;
+    }
+    
+    @Override
+    public String id()
+    {
+        return id;
     }
 }

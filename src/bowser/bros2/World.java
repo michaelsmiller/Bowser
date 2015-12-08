@@ -32,8 +32,6 @@ public class World extends JComponent
     private int score;
     
     private final ArrayList<Entity> entities;
-    private final ArrayList<Nonentity> nonentities;
-    private ArrayList<Nonentity> nonentitiesToAddThisStep;
     private ArrayList<Entity> entitiesToAddThisStep;
 
     public static final HashMap<String, BufferedImage> images = new HashMap<>();
@@ -75,9 +73,6 @@ public class World extends JComponent
         //adds invisible barriers on either end of the map to keep bowser from walking off
         entities.add(new Obstacle(this,new Vector(-1,0),new Vector(1,Global.HEIGHT),Obstacle.INVISIBLE_WALL));
         entities.add(new Obstacle(this,new Vector(length,0),new Vector(1,Global.HEIGHT),Obstacle.INVISIBLE_WALL));
-        
-        nonentities = new ArrayList<>();
-        nonentitiesToAddThisStep = new ArrayList<>();
         
         frame.addKeyListener(new Adapter(this));
         
@@ -147,11 +142,6 @@ public class World extends JComponent
         entities.add(e);
     }
     
-    public void add(Nonentity e)
-    {
-        nonentities.add(e);
-    }
-    
     public JFrame getFrame()
     {
         return (JFrame)SwingUtilities.getWindowAncestor(this);
@@ -170,16 +160,6 @@ public class World extends JComponent
     public ArrayList<Entity> entitiesToAddThisStep()
     {
         return entitiesToAddThisStep;
-    }
-    
-    public ArrayList<Nonentity> nonentitiesToAddThisStep()
-    {
-        return nonentitiesToAddThisStep;
-    }
-    
-    public ArrayList<Nonentity> getNonentities()
-    {
-        return nonentities;
     }
     
     public void incrementScore()
@@ -221,14 +201,14 @@ public class World extends JComponent
         return result;
     }
     
-    public ArrayList<Nonentity> getInRangeNonentities()
+    /*public ArrayList<Nonentity> getInRangeNonentities()
     {
         ArrayList<Nonentity> result = new ArrayList<>();
         for (Nonentity e: nonentities)
             if (inRange(e))
                 result.add(e);
         return result;
-    }
+    }*/
     
     public boolean inYRange(Entity e)
     {
@@ -245,14 +225,14 @@ public class World extends JComponent
                inYRange(e);
     }
     
-    public boolean inRange(Nonentity e)
+    /*public boolean inRange(Nonentity e)
     {
         assert nonentities.contains(e);
         return e.leftX()<lowerX+Global.BOARD_SIZE.x&&
                e.rightX()>lowerX&&
                e.bottomY()>=0 &&
                e.topY()<=Global.BOARD_SIZE.y;
-    }
+    }*/
     
     public ArrayList<Collision> getCollisions()
     {
@@ -279,8 +259,6 @@ public class World extends JComponent
     {
         Graphics2D g2 = (Graphics2D)g;
         g2.drawImage(images.get(background), 0, 0,getWidth(),getHeight(),null);//draws background first
-        for (Nonentity n: getInRangeNonentities())
-            n.draw(g2);
         for (Entity b: getInRangeEntities())
             b.draw(g2);
         double d = Global.BLOCK_LEN;
@@ -346,12 +324,7 @@ public class World extends JComponent
             e.step();
         for (Entity e: entitiesToAddThisStep)//adds the entities created this step
             entities.add(e);
-        for (Nonentity e: nonentities)
-            e.step();
-        for (Nonentity e: nonentitiesToAddThisStep)
-            nonentities.add(e);
         entitiesToAddThisStep = new ArrayList<>();
-        nonentitiesToAddThisStep = new ArrayList<>();
         
         for (int i = 0; i < entities.size();i++)//takes out the trash
         {

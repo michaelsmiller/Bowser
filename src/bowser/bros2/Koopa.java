@@ -11,6 +11,7 @@ package bowser.bros2;
  */
 public class Koopa extends WalkingEnemy
 {
+    private static final String id = "Koopa";
     
     public Koopa(World w, Vector loc) 
     {
@@ -102,5 +103,10 @@ public class Koopa extends WalkingEnemy
             //futureV.x = 0;
             //velocity.x = 0;
         }
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

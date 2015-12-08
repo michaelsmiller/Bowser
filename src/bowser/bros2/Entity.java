@@ -22,11 +22,15 @@ public abstract class Entity
     protected boolean interactable;
     protected String imageName;
     protected int counter;
-    protected boolean staysAtTheEnd;
-    protected int drawPriority;//determines whether to draw last
+    protected boolean staysAtTheEnd;//whether it stays when the game ends
     
-    public static final int LAST = 0;
-    public static final int NOT_LAST = 1;
+    public int depth;//the draw priority. Low number means drawn on top
+    
+    //the depth possible values.
+    public static final int FRONT = 1000;
+    public static final int MIDDLE = 100;
+    public static final int MIDDLE_BACK = 200;
+    public static final int BACK = 10;
     
     //everything is from the reference point of the entity
     public static final int RIGHT = 1;
@@ -283,4 +287,5 @@ public abstract class Entity
     public abstract void die();
     public abstract void step();
     public abstract boolean readyToBeRemoved();
+    public abstract String id();
 }

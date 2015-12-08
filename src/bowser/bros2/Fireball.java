@@ -12,6 +12,7 @@ package bowser.bros2;
 public class Fireball extends Movable
 {
     private final Entity origin;
+    private static final String id = "Fireball";
     
     public static final DVector STANDARD_SIZE = new DVector(Global.BLOCK_LEN*1.2,Global.BLOCK_LEN*.8);
     
@@ -115,6 +116,12 @@ public class Fireball extends Movable
     public boolean readyToBeRemoved() 
     {
         return dead()||!inRange();
+    }
+    
+    @Override
+    public String id()
+    {
+        return id;
     }
     
 }

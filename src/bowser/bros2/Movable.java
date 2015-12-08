@@ -28,7 +28,7 @@ public abstract class Movable extends Entity
         velocity = new DVector();
         futureV = new DVector();
         onGround = false;
-        drawPriority = NOT_LAST;
+        depth = MIDDLE;
     }
     
     public Movable(World w,DVector s, DVector loc)

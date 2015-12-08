@@ -13,6 +13,8 @@ public class Explosion extends Entity
 {
     private int stage;
     
+    private static final String id = "Explosion";
+    
     public Explosion(World w, DVector s, DVector loc) 
     {
         super(w, s, new Vector());
@@ -20,6 +22,7 @@ public class Explosion extends Entity
         interactable = false;
         stage = 1;
         staysAtTheEnd = false;
+        depth = FRONT;
     }
     
     private void updateImageName()
@@ -68,5 +71,10 @@ public class Explosion extends Entity
     public boolean readyToBeRemoved() 
     {
         return dead();
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

@@ -16,6 +16,8 @@ public class Block extends Entity
     private int breakType;
     private int type;
     
+    private final static String id = "Block";
+    
     //types
     public static final int BRICK = 0;
     public static final int GROUND = 1;
@@ -37,6 +39,7 @@ public class Block extends Entity
         breakType = b;
         type = t;
         staysAtTheEnd = true;
+        depth = FRONT;
         updateImageName();
     }
     
@@ -161,5 +164,10 @@ public class Block extends Entity
         world.add(new BrickFragment(world,new DVector(x+r,y),RIGHT,true));//topRight
         world.add(new BrickFragment(world,new DVector(x,y+r),LEFT,false));//bottomLeft
         world.add(new BrickFragment(world,new DVector(x+r,y+r),RIGHT,false));//bottomRight
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

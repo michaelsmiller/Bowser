@@ -11,6 +11,8 @@ package bowser.bros2;
  */
 public class Flag extends Movable
 {
+    private static final String id = "Flag";
+    
     public Flag(World w, Flagpole f) 
     {
         super(w, new Vector(1,1).convert(), new DVector(f.leftX()-Global.BLOCK_LEN*.8,f.topY()+Global.BLOCK_LEN));
@@ -19,6 +21,7 @@ public class Flag extends Movable
         gravity = false;
         velocity = new DVector();
         staysAtTheEnd = true;
+        depth = BACK;
     }
 
     @Override
@@ -71,4 +74,8 @@ public class Flag extends Movable
         return false;
     }
     
+    public String id()
+    {
+        return id;
+    }
 }

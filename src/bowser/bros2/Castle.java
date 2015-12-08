@@ -11,11 +11,13 @@ import java.util.ArrayList;
  *
  * @author MichaelMiller
  */
-public class Castle extends Nonentity
+public class Castle extends Entity
 {
     private final int type;
     private final ArrayList<DVector> fireLocations;
     private int fireCount;
+    
+    private static final String id = "Castle";
     
     public static final int LARGE = 0;
     public static final int SMALL = 1;
@@ -35,6 +37,8 @@ public class Castle extends Nonentity
         }
         fireLocations = fireLocations();
         fireCount = -1;
+        
+        depth = BACK;
     }
     
     private static DVector getSize(int type)
@@ -115,5 +119,10 @@ public class Castle extends Nonentity
     public boolean readyToBeRemoved() 
     {
         return false;
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

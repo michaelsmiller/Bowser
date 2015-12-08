@@ -18,6 +18,8 @@ public class Bowser extends Movable
     private int hurtCount;
     private Flagpole lastFlagpoleTouched;
     
+    private static final String id = "Bowser";
+    
     public static final int BASIC_LEVEL = 0;
     public static final int FIRE_LEVEL = 1;
     
@@ -34,6 +36,7 @@ public class Bowser extends Movable
         hurtCount = -1;
         lastFlagpoleTouched = null;
         staysAtTheEnd = true;
+        depth = MIDDLE;
     }
     
     public Flagpole lastFlagpoleTouched()
@@ -318,5 +321,10 @@ public class Bowser extends Movable
     public void die()
     {
         world.gameOver();
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

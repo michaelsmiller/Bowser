@@ -9,13 +9,15 @@ package bowser.bros2;
  *
  * @author MichaelMiller
  */
-public class Fire extends Nonentity
+public class Fire extends Entity
 {
+    private static final String id = "Fire";
 
     public Fire(World w, DVector s, DVector loc) 
     {
         super(w, s, loc);
         imageName = "Fire1";
+        depth = BACK;
     }
 
     @Override
@@ -37,5 +39,17 @@ public class Fire extends Nonentity
     {
         return false;
     }
+
+    @Override
+    public void die() {
+    }
+
+    @Override
+    public void step() {
+    }
     
+    public String id()
+    {
+        return id;
+    }
 }

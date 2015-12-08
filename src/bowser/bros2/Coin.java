@@ -13,6 +13,8 @@ public final class Coin extends Movable
 {
     private final Block origin;
     
+    private static final String id = "Coin";
+    
     public Coin(World w, Vector loc, Vector originLoc)
     {
         this(w,loc,w.getBlockAt(originLoc.convert()));
@@ -26,6 +28,7 @@ public final class Coin extends Movable
         onGround=false;
         origin = or;
         staysAtTheEnd = true;//do stuff with this!!!!!!!!!!
+        depth = FRONT;
         
         double len = Global.BLOCK_LEN;
         if (hasOrigin())
@@ -112,5 +115,10 @@ public final class Coin extends Movable
     public boolean readyToBeRemoved() 
     {
         return dead();
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }

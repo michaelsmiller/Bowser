@@ -12,6 +12,7 @@ package bowser.bros2;
 public class Flagpole extends Entity
 {
     public static final DVector SIZE = new DVector(.5*Global.BLOCK_LEN,10*Global.BLOCK_LEN);
+    private static final String id = "Flagpole";
     
     private final Flag flag;
     
@@ -23,6 +24,8 @@ public class Flagpole extends Entity
         interactable = true;
         staysAtTheEnd = true;
         flag = new Flag(world,this);
+        depth = BACK;
+        
         world.add(flag);
         world.add(new Block(world,new Vector(blockLoc.x,blockLoc.y+10),Block.INDESTRUCTIBLE,Block.UNBREAKABLE));
     }
@@ -48,5 +51,10 @@ public class Flagpole extends Entity
     public boolean readyToBeRemoved() 
     {
         return false;
+    }
+    
+    public String id()
+    {
+        return id;
     }
 }
