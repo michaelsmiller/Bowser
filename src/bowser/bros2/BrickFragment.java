@@ -85,6 +85,7 @@ public class BrickFragment extends Movable
         return !inRange();
     }
     
+    @Override
     public String id()
     {
         return id;

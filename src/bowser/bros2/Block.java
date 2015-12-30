@@ -39,8 +39,13 @@ public class Block extends Entity
         breakType = b;
         type = t;
         staysAtTheEnd = true;
-        depth = FRONT;
+        depth = MIDDLE;
         updateImageName();
+    }
+    
+    public Block()
+    {
+        super();
     }
     
     private void updateImageName()

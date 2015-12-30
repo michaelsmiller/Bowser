@@ -83,6 +83,12 @@ public abstract class WalkingEnemy extends Movable implements Enemy
             interactable = false;
     }
     
+    private void displayPoints(int type)
+    {
+        world.entitiesToAddThisStep().add(new Label(world,type, topRight()));
+    }
+    
+    @Override
     public void dieFromBlockHit()
     {
         interactable = false;
@@ -91,6 +97,8 @@ public abstract class WalkingEnemy extends Movable implements Enemy
         futureV = new DVector(velocity);
         direction = STILL;
         dying = true;
+        depth = FRONT;
+        displayPoints(Label.NORMAL_HIT);
     }
 
     @Override
@@ -107,5 +115,9 @@ public abstract class WalkingEnemy extends Movable implements Enemy
         return dying;
     }
     
-    public abstract void getStomped();
+    @Override
+    public void getStomped()
+    {
+        displayPoints(Label.NORMAL_HIT);
+    }
 }

@@ -11,9 +11,9 @@ package bowser.bros2;
  */
 public class Collision
 {
-    private Entity entity;
-    private Entity movable;
-    private int type;
+    private final Entity entity;
+    private final Entity movable;
+    private final int type;
     
     public static final int UP = Entity.UP;
     public static final int DOWN = Entity.DOWN;

@@ -6,6 +6,7 @@
 package bowser.bros2;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -30,16 +31,18 @@ public class World extends JComponent
     private final int length;
     private final long startTime,endTime;
     private int score;
+    private int counter;
     
     private final ArrayList<Entity> entities;
     private ArrayList<Entity> entitiesToAddThisStep;
 
     public static final HashMap<String, BufferedImage> images = new HashMap<>();
-    private String background;
+    private String backgroundName;
     private ArrayList<Collision> collisions;
     
     private int gameplay;
     
+    public static final int MENU = -1;
     public static final int NORMAL = 0;
     public static final int FLAGPOLE_ENDING = 1;
     public static final int GAMEOVER = 2;
@@ -47,6 +50,7 @@ public class World extends JComponent
     /**
      * This does everything!
      * @param f the frame
+     * @param size
      * @param X
      * @param stageLen
      */
@@ -56,6 +60,8 @@ public class World extends JComponent
         //f.setSize((int)(Global.LENGTH*Global.BLOCK_LEN),(int)(Global.HEIGHT*Global.BLOCK_LEN)+20);
         frame = f;
         setSize(size);
+        setLayout(null);
+        frame.setTitle("Menu");
         
         lowerX = X;
         length = stageLen;
@@ -77,10 +83,15 @@ public class World extends JComponent
         frame.addKeyListener(new Adapter(this));
         
         readImages();
-        background = "DefaultBackground";
-        score = 0;
+        backgroundName = "DefaultBackground";
         
-        gameplay = NORMAL;
+        setFont(new Font("Serif", Font.BOLD, 12));
+        
+        score = 0;
+        counter = 0;
+        
+        gameplay = MENU;
+        
     }
     
     public World(JFrame f, double X, int stageLen)
@@ -201,15 +212,6 @@ public class World extends JComponent
         return result;
     }
     
-    /*public ArrayList<Nonentity> getInRangeNonentities()
-    {
-        ArrayList<Nonentity> result = new ArrayList<>();
-        for (Nonentity e: nonentities)
-            if (inRange(e))
-                result.add(e);
-        return result;
-    }*/
-    
     public boolean inYRange(Entity e)
     {
         assert entities.contains(e);
@@ -224,15 +226,6 @@ public class World extends JComponent
                e.rightX()>lowerX&&
                inYRange(e);
     }
-    
-    /*public boolean inRange(Nonentity e)
-    {
-        assert nonentities.contains(e);
-        return e.leftX()<lowerX+Global.BOARD_SIZE.x&&
-               e.rightX()>lowerX&&
-               e.bottomY()>=0 &&
-               e.topY()<=Global.BOARD_SIZE.y;
-    }*/
     
     public ArrayList<Collision> getCollisions()
     {
@@ -250,6 +243,11 @@ public class World extends JComponent
         return a;
     }
     
+    private BufferedImage getBack()
+    {
+        return images.get(backgroundName);
+    }
+    
     /**
      * This draws everything
      * @param g the graphics drawing everything
@@ -257,12 +255,30 @@ public class World extends JComponent
     @Override
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawImage(images.get(background), 0, 0,getWidth(),getHeight(),null);//draws background first
-        for (Entity b: getInRangeEntities())
-            b.draw(g2);
-        double d = Global.BLOCK_LEN;
-        //add(new JLabel("This is a test!!!!!!!!!!!!"));
+        
+        if (gameplay == MENU)
+        {
+            g2.drawImage(images.get("BowserHead"), 100,100,300,300,frame);
+            if (counter == 1)
+            {
+                g2.drawString("Loading...",50,50);
+                //gameplay = NORMAL;
+            }
+        }
+        else
+        {
+            g2.drawImage(getBack(), 0, 0,getWidth(),getHeight(),frame);//draws background first
+
+            ArrayList<Entity> ents = getInRangeEntities();
+            ents.sort(null);
+            for (Entity b: ents)
+                b.draw(g2);
+
+            double d = Global.BLOCK_LEN;
+            
+        }
     }
     
     /**
@@ -317,28 +333,44 @@ public class World extends JComponent
     
     public void step()
     {
-        moveFrame();
-        stepLocations();//moves all the entities into position, doesnt do collision detection yet
-        
-        for (Entity e: entities)//does the collision detection and updates everything
-            e.step();
-        for (Entity e: entitiesToAddThisStep)//adds the entities created this step
-            entities.add(e);
-        entitiesToAddThisStep = new ArrayList<>();
-        
-        for (int i = 0; i < entities.size();i++)//takes out the trash
+        if (gameplay == MENU)
         {
-            Entity e = entities.get(i);
-            if (e.readyToBeRemoved())
+            frame.repaint();
+            if (counter==1)
             {
-                deathThrow(e);
-                entities.remove(e);
-                i--;
+                pause(2000);
+                frame.setTitle("BowserBros");
+                gameplay = NORMAL;
+                counter = 0;
             }
+            System.out.println(""+counter);
         }
-        
-        frame.repaint();
-        collisions = new ArrayList<>();
+        else //gameplay == NORMAL
+        {
+            moveFrame();
+            stepLocations();//moves all the entities into position, doesnt do collision detection yet
+
+            for (Entity e: entities)//does the collision detection and updates everything
+                e.step();
+            for (Entity e: entitiesToAddThisStep)//adds the entities created this step
+                entities.add(e);
+            entitiesToAddThisStep = new ArrayList<>();//empties that out
+
+            for (int i = 0; i < entities.size();i++)//takes out the trash
+            {
+                Entity e = entities.get(i);
+                if (e.readyToBeRemoved())
+                {
+                    deathThrow(e);
+                    entities.remove(e);
+                    i--;
+                }
+            }
+
+            frame.repaint();
+            collisions = new ArrayList<>();
+        }
+        counter++;
     }
     
     public void run()

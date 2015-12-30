@@ -74,6 +74,7 @@ public class Flag extends Movable
         return false;
     }
     
+    @Override
     public String id()
     {
         return id;

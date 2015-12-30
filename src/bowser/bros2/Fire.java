@@ -20,7 +20,6 @@ public class Fire extends Entity
         depth = BACK;
     }
 
-    @Override
     protected void updateImageName() 
     {
         if (counter%20<10)
@@ -28,7 +27,6 @@ public class Fire extends Entity
         else imageName = "Fire2";
     }
 
-    @Override
     protected void finalUpdates() 
     {
         counter++;
@@ -45,9 +43,13 @@ public class Fire extends Entity
     }
 
     @Override
-    public void step() {
+    public void step() 
+    {
+        updateImageName();
+        finalUpdates();
     }
     
+    @Override
     public String id()
     {
         return id;

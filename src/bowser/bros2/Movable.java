@@ -22,19 +22,18 @@ public abstract class Movable extends Entity
     public static final int NO_COLLISION = 10;
     
     //extending this should take care of gravity
-    public Movable(World w, DVector s, Vector loc)
+    public Movable(World w, DVector s, Vector blockLoc)
+    {
+        this(w,s,blockLoc.convert());
+    }
+    
+    public Movable(World w,DVector s, DVector loc)
     {
         super(w,s,loc);
         velocity = new DVector();
         futureV = new DVector();
         onGround = false;
-        depth = MIDDLE;
-    }
-    
-    public Movable(World w,DVector s, DVector loc)
-    {
-        this(w,s,new Vector());
-        location = loc;
+        depth = MIDDLE;//by default it should be middle
     }
     
     public boolean onGround()

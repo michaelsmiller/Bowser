@@ -6,6 +6,7 @@
 package bowser.bros2;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.JFrame;
 
 /**

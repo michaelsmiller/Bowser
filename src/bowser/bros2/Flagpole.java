@@ -53,6 +53,7 @@ public class Flagpole extends Entity
         return false;
     }
     
+    @Override
     public String id()
     {
         return id;

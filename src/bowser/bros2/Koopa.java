@@ -25,12 +25,6 @@ public class Koopa extends WalkingEnemy
         return size.x==size.y;
     }
 
-    /*@Override
-    public void factorInControl() 
-    {
-        //nothing for now I think
-    }*/
-
     @Override
     public void finalUpdates()
     {
@@ -93,6 +87,7 @@ public class Koopa extends WalkingEnemy
     @Override
     public void getStomped() 
     {
+        super.getStomped();
         if (!inShell())
             turnIntoShell();
         else if (direction==STILL)

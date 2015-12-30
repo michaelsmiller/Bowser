@@ -19,14 +19,14 @@ import javax.swing.JPanel;
  */
 public class LevelDesigner extends JFrame
 {
-    //FIX THE NONENTITY PROBLEM!!!!!!!!
     private World picture;
     private Square[] squares;
     private Square selectedSquare;
     
     public static void main(String[] args)
     {
-        
+        LevelDesigner f = new LevelDesigner();
+        f.setVisible(true);
     }
     
     public LevelDesigner()
@@ -39,7 +39,10 @@ public class LevelDesigner extends JFrame
         
         JPanel sidePanel = new JPanel();
         sidePanel.setLayout(new GridLayout(4,4));
+        
         squares = new Square[16];
+        
+        
         selectedSquare = null;
     }
 }
@@ -47,7 +50,7 @@ public class LevelDesigner extends JFrame
 class Square extends JComponent
 {
     private boolean selected;
-    private 
+    private Entity entity;
     
     public Square(boolean b,String name)
     {
@@ -77,8 +80,16 @@ class Square extends JComponent
     }
 }
 
-enum Ent
+enum EntityType
 {
-    private String name;
-    private 
+    Blockt(new Block());
+    
+    private final String type;
+    private final Entity entity;
+
+    EntityType(Entity e)
+    {
+        type = e.id();
+        entity = e;
+    }
 }

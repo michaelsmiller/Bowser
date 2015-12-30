@@ -13,6 +13,8 @@ public class Mushroom extends Movable
 {
     private final int type;
     
+    private static final String id = "Mushroom";
+    
     public static final int LIFE=0;
     public static final int POWER=1;
 
@@ -30,6 +32,7 @@ public class Mushroom extends Movable
         gravity = true;
         interactable = true;
         staysAtTheEnd = false;
+        depth = MIDDLE_BACK;
     }
     
     public Mushroom(World w, DVector loc, int t)
@@ -91,5 +94,11 @@ public class Mushroom extends Movable
     public boolean readyToBeRemoved() 
     {
         return dead();
+    }
+    
+    @Override
+    public String id()
+    {
+        return id;
     }
 }

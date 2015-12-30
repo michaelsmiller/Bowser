@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author MichaelMiller
  */
-public abstract class Entity 
+public abstract class Entity implements Comparable<Entity>
 {
     protected DVector size;
     protected DVector location;
@@ -39,14 +39,25 @@ public abstract class Entity
     public static final int DOWN = 2;
     public static final int STILL = 0;
     
-    //any constructor extending Entity should instantiate imageName and interactable
-    public Entity(World w, DVector s, Vector blockLoc)
+    public Entity(World w, DVector s, DVector loc)
     {
         size = s;
-        location = blockLoc.convert();
+        location = loc;
         world =w;
         deadCount = -1;
         counter = 0;
+    }
+    
+    //This is for level creator
+    public Entity()
+    {
+        
+    }
+    
+    //any constructor extending Entity should instantiate imageName and interactable
+    public Entity(World w, DVector s, Vector blockLoc)
+    {
+        this(w,s,blockLoc.convert());
     }
     
     public Entity(World w)
@@ -116,7 +127,7 @@ public abstract class Entity
     //DEAR GOD THIS IS VERY IMPORTANT MAN!
     protected static boolean between(double x, double a, double b)
     {
-        return x>a&&x<b;
+        return x>a&&x<b;//it should be this one
         //return x>=a&&x<=b;
     }
     
@@ -252,7 +263,7 @@ public abstract class Entity
     
     public BufferedImage getImage()
     {
-        return world.images.get(imageName);
+        return World.images.get(imageName);
     }
     
     public void draw(Graphics2D g2)
@@ -261,7 +272,7 @@ public abstract class Entity
         {
             g2.drawImage(getImage(), (int) (location.x-world.getLowerX()), (int) location.y,
                     (int) size.x,(int) size.y,world);
-        
+            
             //g2.drawRect((int) location.x, (int) location.y,
               //      (int) size.x, (int) size.y);
         }
@@ -282,6 +293,12 @@ public abstract class Entity
             case RIGHT: System.out.println("Right");break;
             case STILL: System.out.println("Still");break;
         }
+    }
+    
+    @Override
+    public int compareTo(Entity a)
+    {
+        return depth-a.depth;
     }
     
     public abstract void die();

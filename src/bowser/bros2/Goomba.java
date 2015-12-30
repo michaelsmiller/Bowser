@@ -45,6 +45,7 @@ public class Goomba extends WalkingEnemy
     @Override
     public void getStomped()
     {
+        super.getStomped();
         die();
     }
     

@@ -117,6 +117,7 @@ public final class Coin extends Movable
         return dead();
     }
     
+    @Override
     public String id()
     {
         return id;

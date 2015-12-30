@@ -35,4 +35,10 @@ public class Obstacle extends Block
         }
         throw new Error("Did you misspell something?");
     }
+    
+    @Override
+    public String id()
+    {
+        return id;
+    }
 }

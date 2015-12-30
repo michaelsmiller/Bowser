@@ -27,7 +27,7 @@ public class Castle extends Entity
     
     public Castle(World w, Vector loc, int t) 
     {
-        super(w, getSize(t), loc.convert());
+        super(w, getSize(t), loc);
         type = t;
         
         switch (type)
@@ -84,22 +84,20 @@ public class Castle extends Entity
         else if (fireLocations.size()==1)
         {
             DVector loc = fireLocations.remove(0);
-            world.nonentitiesToAddThisStep().add(new Fire(world,
+            world.entitiesToAddThisStep().add(new Fire(world,
                                                 new DVector(size.x+2*d,size.y+2*d),loc));
             return;
         }
         
         DVector loc = fireLocations.remove(fireLocations.size()-1);
-        world.nonentitiesToAddThisStep().add(new Fire(world,new Vector(1,1).convert(),loc));
+        world.entitiesToAddThisStep().add(new Fire(world,new Vector(1,1).convert(),loc));
     }
 
-    @Override
     protected void updateImageName() 
     {
         //should do nothing.
     }
 
-    @Override
     protected void finalUpdates() 
     {
         counter++;
@@ -107,7 +105,7 @@ public class Castle extends Entity
         //deals with fire
         if (between(world.getBowser().rightX(),leftX(),rightX())&&fireCount==-1)
             fireCount = counter;
-        if (fireCount!=-1)
+        if (fireCount>-1)
         {
             int count = counter-fireCount;
             if (count%Global.FIRE_DELAY==0)
@@ -121,8 +119,21 @@ public class Castle extends Entity
         return false;
     }
     
+    @Override
     public String id()
     {
         return id;
+    }
+
+    @Override
+    public void die() 
+    {
+        //nothing for now
+    }
+
+    @Override
+    public void step() 
+    {
+        finalUpdates();
     }
 }

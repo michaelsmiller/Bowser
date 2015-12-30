@@ -73,6 +73,7 @@ public class Explosion extends Entity
         return dead();
     }
     
+    @Override
     public String id()
     {
         return id;

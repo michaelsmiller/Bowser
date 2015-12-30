@@ -127,7 +127,7 @@ public class Bowser extends Movable
         boolean realCollision = false;
         boolean reciprocal = false;
         if (a instanceof Flagpole)
-        {
+        {//make points appear properly and for score
             Flagpole f = (Flagpole)a;
             lastFlagpoleTouched = f;
             world.setGameplay(World.FLAGPOLE_ENDING);
@@ -323,6 +323,7 @@ public class Bowser extends Movable
         world.gameOver();
     }
     
+    @Override
     public String id()
     {
         return id;
