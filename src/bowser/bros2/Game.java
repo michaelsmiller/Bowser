@@ -6,7 +6,6 @@
 package bowser.bros2;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JFrame;
 
 /**
@@ -49,7 +48,7 @@ public class Game
         
         w.add(new Castle(w,new Vector(37,lowest-6),Castle.SMALL));
         
-        w.sortEntities();//sorts so that koopas get priority.
+        w.sortEntities();//sorts so that koopas get priority (I don't know what this comment means anymore)
         
         f.setLocationRelativeTo(null);
         f.setVisible(true);

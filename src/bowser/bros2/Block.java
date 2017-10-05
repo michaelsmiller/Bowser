@@ -16,8 +16,6 @@ public class Block extends Entity
     private int breakType;
     private int type;
     
-    private final static String id = "Block";
-    
     //types
     public static final int BRICK = 0;
     public static final int GROUND = 1;
@@ -173,6 +171,20 @@ public class Block extends Entity
     
     public String id()
     {
-        return id;
+        String prefix;
+        if (type==BRICK)
+            prefix = "Brick";
+        else if (type==GROUND)
+            prefix = "Ground";
+        else if (type==INVISIBLE)
+            prefix = "Invisible";
+        else if (type == PERMANENT)
+            prefix = "Permanent";
+        else if (type == QUESTION)
+            prefix = "Question";
+        else  //(type == INDESTRUCTIBLE)
+            prefix = "Indestructible";
+        
+        return prefix+"Block";
     }
 }

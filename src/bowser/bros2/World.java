@@ -43,6 +43,7 @@ public class World extends JComponent
     private int gameplay;
     
     public static final int MENU = -1;
+    public static final int LEVEL_DESIGNER = -2;
     public static final int NORMAL = 0;
     public static final int FLAGPOLE_ENDING = 1;
     public static final int GAMEOVER = 2;
@@ -56,7 +57,7 @@ public class World extends JComponent
      */
     public World(JFrame f, Dimension size, double X, int stageLen)
     {
-        super();
+        this(f,size,stageLen);
         //f.setSize((int)(Global.LENGTH*Global.BLOCK_LEN),(int)(Global.HEIGHT*Global.BLOCK_LEN)+20);
         frame = f;
         setSize(size);
@@ -64,15 +65,9 @@ public class World extends JComponent
         frame.setTitle("Menu");
         
         lowerX = X;
-        length = stageLen;
-        
-        //remember this
-        startTime = System.currentTimeMillis();
-        endTime = 0;
         
         collisions = new ArrayList<>();
         
-        entities = new ArrayList<>();
         entitiesToAddThisStep = new ArrayList<>();
         entities.add(new Bowser(this,new Vector(5,3)));
         
@@ -92,6 +87,29 @@ public class World extends JComponent
         
         gameplay = MENU;
         
+    }
+    
+    public World(JFrame f, Dimension size, int stageLen)
+    {
+        super();
+        frame = f;
+        setSize(size);
+        setLayout(null);
+        frame.setTitle("Designer");
+        
+        lowerX = 0;
+        length = stageLen;
+        
+        //remember this
+        startTime = System.currentTimeMillis();
+        endTime = 0;
+        
+        entities = new ArrayList<>();
+        
+        readImages();
+        backgroundName = "DefaultBackground";
+        
+        gameplay = LEVEL_DESIGNER;
     }
     
     public World(JFrame f, double X, int stageLen)
